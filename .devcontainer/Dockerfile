@@ -5,12 +5,9 @@ FROM tatsuya6502/vscode-devcontainers-rust:1
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
-# sccache?
+# Install sccache and some Cargo sub-commands.
+RUN cargo install sccache && \
+    cargo install cargo-edit && \
+    cargo install cargo-expand
 
-# Install some Cargo sub-commands.
-# RUN cargo install cargo-bloat && \
-#     cargo install cargo-edit && \
-#     cargo install cargo-expand && \
-#     cargo install cargo-licence && \
-#     cargo install cargo-outdated && \
-#     cargo install cargo-upgrade
+ENV RUSTC_WRAPPER=sccache
